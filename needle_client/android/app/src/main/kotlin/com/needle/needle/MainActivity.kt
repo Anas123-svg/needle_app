@@ -1,4 +1,4 @@
-package com.example.needle_client
+package com.needle.needle
 
 import io.flutter.embedding.android.FlutterActivity
 
