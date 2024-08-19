@@ -15,7 +15,7 @@ class TableCellText extends StatelessWidget {
         padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 8, top: 10),
         child: Text(
           '$name',
-          style: GoogleFonts.montserrat(color: Color(0XFFC2523E)),
+          style: GoogleFonts.montserrat(fontSize: 11, color: Color(0XFFC2523E)),
         ),
       ),
     );

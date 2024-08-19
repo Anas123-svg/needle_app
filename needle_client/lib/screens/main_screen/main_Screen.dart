@@ -20,9 +20,11 @@ class _MainScreenState extends State<MainScreen> {
     final MainscreenController navController = Get.put(MainscreenController());
 
     return Scaffold(
+      backgroundColor: AppColors.whiteColor,
       body: Obx(() => navController.screens[navController.selectedIndex.value]),
       drawer: Drawer(),
       appBar: AppBar(
+        backgroundColor: AppColors.whiteColor,
         actions: [
           Container(
             margin: EdgeInsets.only(right: 15),

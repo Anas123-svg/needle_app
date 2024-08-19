@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:get/get.dart' hide Response, Trans;
-import 'package:needle/network/dio_exception.dart';
-import 'package:needle/network/endpoints.dart';
 
+import 'package:needle_project/network/dio_exception.dart';
+import 'package:needle_project/network/endpoints.dart';
 
 import 'interceptors/logger_interceptor.dart';
 

@@ -13,7 +13,7 @@ class TableHeaderText extends StatelessWidget {
     return Text(
       "$name",
       style: GoogleFonts.montserrat(
-          fontWeight: FontWeight.w700, color: Color(0XFF108F86)),
+          fontSize: 12, fontWeight: FontWeight.w700, color: Color(0XFF108F86)),
     );
   }
 }

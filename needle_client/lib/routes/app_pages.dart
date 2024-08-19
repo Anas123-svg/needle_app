@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:needle/routes/app_routes.dart';
-import 'package:needle/screens/splash_screen.dart';
+
+import 'package:needle_project/routes/app_routes.dart';
+import 'package:needle_project/screens/splashscreen/splashscreen.dart';
 
 class AppPages {
   static final appRoutes = [
