@@ -1,6 +1,6 @@
 {
-    "name": "needle_client",
-    "short_name": "needle_client",
+    "name": "needle_project",
+    "short_name": "needle_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
