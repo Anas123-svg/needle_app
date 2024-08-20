@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArtistAuthController;
 
 use App\Http\Controllers\ArtistAuthController;
 use App\Http\Controllers\EarningController;
@@ -22,3 +23,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/earnings/{id}', [EarningController::class, 'updateEarning']);
     Route::delete('/earnings/{id}', [EarningController::class, 'deleteEarning']);
 });
+
+
+Route::post('/artist/register', [ArtistAuthController::class, 'register']);
+Route::post('/login', [ArtistAuthController::class, 'login']);
+
+// Social login routes
+Route::get('/auth/google', [ArtistAuthController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [ArtistAuthController::class, 'handleGoogleCallback']);
+
