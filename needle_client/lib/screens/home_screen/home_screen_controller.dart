@@ -2,6 +2,18 @@ import 'package:get/get.dart';
 import 'dart:async';
 
 class HomeScreenController extends GetxController {
+  var sessionStart = false.obs;
+  var text_session = "Start New Session".obs;
+  var txt = "End Session".obs;
+  void toggleSession() {
+    sessionStart.value = !sessionStart.value;
+    if (sessionStart.value) {
+      text_session.value = "End Session";
+    } else {
+      text_session.value = "Start New Session";
+    }
+  }
+
   var _seconds = 0.obs;
   var _minutes = 0.obs;
   var _hours = 0.obs;

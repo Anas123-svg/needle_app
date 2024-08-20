@@ -18,4 +18,5 @@ class AppColors {
   static const Color richBlueGreen = Color(0xFF2E745B);
   static const Color richGreen1 = Color(0xFF297F5A);
   static const Color richGreen2 = Color(0xFF316D5A);
+  static const Color richGreen3 = Color(0xFF457B6A);
 }

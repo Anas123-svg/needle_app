@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:needle_project/screens/main_screen/mainscreen_controller.dart';
 import 'package:needle_project/utils/Colors.dart';
@@ -78,7 +77,7 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 15),
+      height: kBottomNavigationBarHeight, // Ensures a standard height
       decoration: BoxDecoration(
         color: AppColors.richBlueGreen,
         boxShadow: [
@@ -91,26 +90,26 @@ class CustomBottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(Icons.home, 'Home', 0),
-          _buildNavItem(Icons.schedule, 'Session', 1),
-          _buildNavItem(Icons.person, 'Client', 2),
-          _buildNavItem(Icons.folder, 'Portfolio', 3),
-          _buildNavItem(Icons.account_circle, 'Profile', 4),
+          _buildNavItem('assets/icons/home.png', 'Home', 0),
+          _buildNavItem("assets/icons/session.png", 'Session', 1),
+          _buildNavItem("assets/icons/client.png", 'Client', 2),
+          _buildNavItem("assets/icons/portfolio.png", 'Portfolio', 3),
+          _buildNavItem("assets/icons/profile.png", 'Profile', 4),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, int index) {
+  Widget _buildNavItem(String? icon, String label, int index) {
     return GestureDetector(
       onTap: () => onTap(index),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
+          Image.asset(
+            icon!,
             color: selectedIndex == index ? Colors.green : Colors.white,
-            size: 28,
+            height: 28,
           ),
           Text(
             label,
