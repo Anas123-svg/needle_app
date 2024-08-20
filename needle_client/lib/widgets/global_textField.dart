@@ -9,12 +9,9 @@ class global_textfield extends StatefulWidget {
 
   const global_textfield({
     super.key,
-    required this.loginController,
     required this.controller,
     required this.textfieldDecoration,
   });
-
-  final LoginController loginController;
 
   @override
   State<global_textfield> createState() => _global_textfieldState();

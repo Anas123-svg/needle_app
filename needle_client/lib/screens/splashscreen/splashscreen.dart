@@ -68,6 +68,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
               // Button Container
               global_button(
+                w: double.infinity,
+                h: 50,
                 callBackFunction: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -76,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   color: AppColors.tealblue,
                   borderRadius: BorderRadius.circular(30),
                 ),
-                buttonText: Text(
+                anyWidget: Text(
                   "Let's Go!",
                   style: GoogleFonts.montserrat(
                       fontSize: 20,

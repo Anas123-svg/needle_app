@@ -6,13 +6,12 @@ import 'package:needle_project/screens/main_screen/main_Screen.dart';
 import 'package:needle_project/screens/splashscreen/splashscreen.dart';
 
 void main() {
-  runApp(HomePage());
-  // runApp(
-  //   DevicePreview(
-  //     enabled: true,
-  //     builder: (context) => HomePage(), // Wrap your app
-  //   ),
-  // );
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => HomePage(), // Wrap your app
+    ),
+  );
 }
 
 class HomePage extends StatefulWidget {

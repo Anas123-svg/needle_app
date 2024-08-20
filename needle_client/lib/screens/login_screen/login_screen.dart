@@ -80,7 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(20)),
                         prefixIcon: Image.asset('assets/icons/email.png')),
                     controller: loginController.emailController,
-                    loginController: loginController,
                   ),
                   SizedBox(height: height * 0.02),
                   global_textfield(
@@ -98,7 +97,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(20)),
                         prefixIcon: Image.asset('assets/icons/password.png')),
                     controller: loginController.passwordController,
-                    loginController: loginController,
                   ),
                 ],
               ),
@@ -109,6 +107,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
             // Buttons
             global_button(
+              w: double.infinity,
+              h: 50,
               callBackFunction: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => MainScreen()));
@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: AppColors.paleLimeGreen,
               ),
               Leadingimage: null,
-              buttonText: Text(
+              anyWidget: Text(
                 'Login',
                 style: GoogleFonts.montserrat(
                   color: Colors.white,
@@ -129,26 +129,41 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: height * 0.02),
             global_button(
+              w: double.infinity,
+              h: 50,
               containerDecoration: BoxDecoration(
                 border: Border.all(),
                 borderRadius: BorderRadius.circular(30),
                 color: Colors.white,
               ),
-              Leadingimage: 'assets/icons/gmail_icon.png',
-              buttonText: Text(
-                'Sign Up with Google',
-                style: GoogleFonts.montserrat(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+              anyWidget: Row(
+                children: [
+                  Image.asset(
+                    'assets/icons/gmail_icon.png',
+                    height: height * 0.07,
+                    width: width * 0.07,
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        'Sign Up with Google',
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Right blank space
+                  SizedBox(
+                    width: width *
+                        0.07, // Adjust the width as needed for the blank space
+                  ),
+                ],
               ),
             ),
-
-            // Add large space before the Sign-Up link
             Spacer(),
-
-            // Sign-Up link at the bottom
             GestureDetector(
               onTap: () {},
               child: Container(

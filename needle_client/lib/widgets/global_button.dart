@@ -5,6 +5,9 @@ import 'package:needle_project/screens/home_screen/home_screen.dart';
 import 'package:needle_project/utils/Colors.dart';
 
 class global_button extends StatefulWidget {
+  final Widget anyWidget;
+  final double? h;
+  final double? w;
   final VoidCallback? callBackFunction;
   final BoxDecoration? containerDecoration;
   final Text? buttonText;
@@ -15,6 +18,9 @@ class global_button extends StatefulWidget {
     this.buttonText,
     this.containerDecoration,
     this.callBackFunction,
+    required this.h,
+    required this.w,
+    required this.anyWidget,
   });
 
   @override
@@ -32,31 +38,33 @@ class _global_buttonState extends State<global_button> {
       child: Container(
           padding: EdgeInsets.all(10),
           decoration: widget.containerDecoration,
-          width: double.infinity,
-          height: 50,
-          child: widget.Leadingimage != null
-              ? Row(
-                  children: [
-                    Image.asset(
-                      '${widget.Leadingimage}',
-                      height: h * 0.07,
-                      width: w * 0.07,
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: widget.buttonText!,
-                      ),
-                    ),
-                    // Right blank space
-                    SizedBox(
-                      width: w *
-                          0.07, // Adjust the width as needed for the blank space
-                    ),
-                  ],
-                )
-              : Center(
-                  child: widget.buttonText!,
-                )),
+          width: widget.w,
+          height: widget.h,
+          child: widget.anyWidget),
     );
   }
 }
+
+  // widget.Leadingimage != null
+  //             ? Row(
+  //                 children: [
+  //                   Image.asset(
+  //                     '${widget.Leadingimage}',
+  //                     height: h * 0.07,
+  //                     width: w * 0.07,
+  //                   ),
+  //                   Expanded(
+  //                     child: Center(
+  //                       child: widget.buttonText!,
+  //                     ),
+  //                   ),
+  //                   // Right blank space
+  //                   SizedBox(
+  //                     width: w *
+  //                         0.07, // Adjust the width as needed for the blank space
+  //                   ),
+  //                 ],
+  //               )
+  //             : Center(
+  //                 child: widget.buttonText!,
+  //               )
