@@ -1,4 +1,4 @@
-# needle_project
+# needle_client
 
 A new Flutter project.
 
