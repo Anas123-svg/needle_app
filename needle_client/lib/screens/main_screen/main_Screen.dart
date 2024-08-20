@@ -90,17 +90,17 @@ class CustomBottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem('assets/icons/home.png', 'Home', 0),
-          _buildNavItem("assets/icons/session.png", 'Session', 1),
-          _buildNavItem("assets/icons/client.png", 'Client', 2),
-          _buildNavItem("assets/icons/portfolio.png", 'Portfolio', 3),
-          _buildNavItem("assets/icons/profile.png", 'Profile', 4),
+          _buildNavItem('assets/icons/home.png', 'Home', 0, 28),
+          _buildNavItem("assets/icons/session.png", 'Session', 1, 40),
+          _buildNavItem("assets/icons/client.png", 'Client', 2, 28),
+          _buildNavItem("assets/icons/portfolio.png", 'Portfolio', 3, 28),
+          _buildNavItem("assets/icons/profile.png", 'Profile', 4, 28),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(String? icon, String label, int index) {
+  Widget _buildNavItem(String? icon, String label, int index, double h) {
     return GestureDetector(
       onTap: () => onTap(index),
       child: Column(
@@ -109,7 +109,7 @@ class CustomBottomNavBar extends StatelessWidget {
           Image.asset(
             icon!,
             color: selectedIndex == index ? Colors.green : Colors.white,
-            height: 28,
+            height: h,
           ),
           Text(
             label,
