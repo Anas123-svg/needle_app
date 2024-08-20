@@ -59,7 +59,7 @@ class ArtistAuthController extends Controller
         return response()->json(['message' => 'Artist registered successfully', 'artist' => $artist, 'token' => $token], 201);
     }
 
-    // Login for artist yayyy
+    // Login for artist updated
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
