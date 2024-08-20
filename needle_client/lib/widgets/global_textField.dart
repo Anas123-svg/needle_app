@@ -21,6 +21,7 @@ class _global_textfieldState extends State<global_textfield> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 10),
       width: double.infinity,
       child: TextFormField(
         decoration: widget.textfieldDecoration,

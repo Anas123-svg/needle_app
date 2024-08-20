@@ -23,7 +23,7 @@ class global_dropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
           border: Border.all(), borderRadius: BorderRadius.circular(15)),
       child: DropdownButton<String>(

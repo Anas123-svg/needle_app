@@ -107,6 +107,9 @@ class _SessionScreenState extends State<SessionScreen> {
                 ),
                 txt: 'Break time',
               ),
+              SizedBox(
+                height: 5,
+              ),
               Container(
                 decoration: BoxDecoration(border: Border.all()),
                 width: double.infinity,
@@ -132,6 +135,9 @@ class _SessionScreenState extends State<SessionScreen> {
                     )
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 global_button(
