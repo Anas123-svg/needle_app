@@ -12,7 +12,7 @@ class TableCellText extends StatelessWidget {
   Widget build(BuildContext context) {
     return TableCell(
       child: Padding(
-        padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 8, top: 10),
+        padding: const EdgeInsets.only(bottom: 15, top: 15),
         child: Text(
           '$name',
           style: GoogleFonts.montserrat(fontSize: 11, color: Color(0XFFC2523E)),

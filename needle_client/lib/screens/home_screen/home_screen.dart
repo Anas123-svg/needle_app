@@ -498,7 +498,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: Container(
-                                    height: h * 0.1,
+                                    height: h * 0.13,
                                     margin: EdgeInsets.only(left: 15),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),

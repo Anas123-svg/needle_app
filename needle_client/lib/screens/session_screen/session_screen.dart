@@ -113,7 +113,7 @@ class _SessionScreenState extends State<SessionScreen> {
               Container(
                 decoration: BoxDecoration(border: Border.all()),
                 width: double.infinity,
-                height: 150,
+                height: h * 0.25,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +123,9 @@ class _SessionScreenState extends State<SessionScreen> {
                         child: Text(
                           'A knight  half sleeve with red eyes.Background with arrows.See attached files for references Available every monday',
                           style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w700, fontSize: 14),
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                              height: 2),
                         )),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -146,8 +148,8 @@ class _SessionScreenState extends State<SessionScreen> {
                       'assets/icons/attachment.png',
                     ),
                   ),
-                  w: w * 0.22,
-                  h: h * 0.09,
+                  w: w * 0.2,
+                  h: h * 0.07,
                   containerDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: AppColors.mintyGreen),
@@ -160,8 +162,8 @@ class _SessionScreenState extends State<SessionScreen> {
                           GoogleFonts.montserrat(fontWeight: FontWeight.w700),
                     ),
                   ),
-                  w: w * 0.21,
-                  h: h * 0.09,
+                  w: w * 0.2,
+                  h: h * 0.07,
                   containerDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: AppColors.mintyGreen),
