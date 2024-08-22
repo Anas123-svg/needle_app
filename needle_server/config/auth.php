@@ -38,6 +38,13 @@ return [
     ],
 
     'passwords' => [
+        'artists' => [
+            'provider' => 'artists',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    
         'users' => [
             'provider' => 'users',
             'reset' => 'passwords',

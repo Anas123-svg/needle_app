@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtistAuthController;
 
-use App\Http\Controllers\ArtistAuthController;
 use App\Http\Controllers\EarningController;
 
 // Artist routes
@@ -32,3 +31,6 @@ Route::post('/login', [ArtistAuthController::class, 'login']);
 Route::get('/auth/google', [ArtistAuthController::class, 'redirectToGoogle']);
 Route::get('/auth/google/callback', [ArtistAuthController::class, 'handleGoogleCallback']);
 
+
+Route::post('artist/forgot-password', [ArtistAuthController::class, 'sendResetLinkEmail']);
+Route::post('artist/reset-password', [ArtistAuthController::class, 'resetPassword']);

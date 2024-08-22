@@ -2,10 +2,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+use App\Mail\PasswordResetCodeMail;
+use Symfony\Component\Mime\Email;
 
 class ArtistAuthController extends Controller
 {
@@ -120,4 +128,72 @@ class ArtistAuthController extends Controller
 
         return response()->json(['error' => 'No profile image found'], 404);
     }
+
+
+
+
+    
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+    
+        $user = Artist::where('email', $request->email)->first();
+    
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+    
+        // Generate a 6-digit verification code
+        $code = rand(100000, 999999);
+    
+        // Store the code in the password_resets table
+        DB::table('password_resets')->updateOrInsert(
+            ['email' => $request->email],
+            [
+                'token' => $code,
+                'created_at' => now()
+            ]
+        );
+    
+        // Send the code via email using Mailable class
+        Mail::to($request->email)->send(new PasswordResetCodeMail($code));
+    
+        return response()->json(['message' => 'Verification code sent'], 200);
+    }
+        
+    
+    // Reset password
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required', // The verification code
+            'email' => 'required|email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        $reset = DB::table('password_resets')
+                    ->where('email', $request->email)
+                    ->where('token', $request->token)
+                    ->first();
+    
+        if (!$reset) {
+            return response()->json(['error' => 'Invalid or expired reset code'], 400);
+        }
+    
+        $user = Artist::where('email', $request->email)->first();
+    
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+    
+        $user->forceFill([
+            'password' => Hash::make($request->password),
+            'remember_token' => Str::random(60),
+        ])->save();
+    
+        DB::table('password_resets')->where('email', $request->email)->delete();
+    
+        return response()->json(['message' => 'Password reset successfully'], 200);
+    }
+        
 }

@@ -5,8 +5,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
-class Artist extends Authenticatable
+
+class Artist extends Authenticatable implements CanResetPassword
 {
     use HasApiTokens, HasFactory, Notifiable;
 
