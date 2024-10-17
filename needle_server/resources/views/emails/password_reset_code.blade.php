@@ -40,6 +40,7 @@
             background-color: #007bff;
             border-radius: 4px;
             margin: 20px 0;
+            
         }
         .footer {
             text-align: center;

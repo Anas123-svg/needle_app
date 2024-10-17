@@ -27,16 +27,19 @@ class Artist extends Authenticatable implements CanResetPassword
         'facebook_page',
         'tax_number_1',
         'tax_number_2',
-        'password',
-        'invoice_note',
         'tattoo_rate',
         'consultation_rate',
         'drawing_rate',
+        'taxable',
+        'other_rate',
+        'tax_rate_1',
+        'tax_rate_2',
+        'password',
+        'invoice_note',
         'wifi_qr_code_path',
         'profile_image',
-
     ];
-
+    
     protected $hidden = [
         'password',
         'remember_token',
@@ -46,4 +49,10 @@ class Artist extends Authenticatable implements CanResetPassword
         'email_verified_at' => 'datetime',
         'birthdate' => 'date',
     ];
+
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
+
 }
