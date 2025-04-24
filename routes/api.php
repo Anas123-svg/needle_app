@@ -12,7 +12,7 @@ use App\Http\Controllers\PortfolioImageCategoryController;
 use App\Http\Controllers\PortfolioImageController;
 use App\Http\Controllers\BookAppointmentController;
 
-
+//update
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
