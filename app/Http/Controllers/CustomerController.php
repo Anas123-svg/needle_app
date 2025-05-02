@@ -9,19 +9,29 @@ use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
+
+
     public function index()
     {
         $user_id = auth()->id();
+    
+        // Get current day of the week (e.g., "Monday", "Tuesday", etc.)
+        $currentDay = now()->format('l');  // 'l' will return the full textual representation of the day
     
         $customers = Customer::with('images')
             ->where('user_id', $user_id)
             ->orderBy('created_at', 'desc')
             ->get()
-            ->map(function ($customer) {
+            ->map(function ($customer) use ($currentDay) {
+                // Check if the current day is in the customer's availability
+                $customer->customerAvailable = $this->isAvailableToday($customer->availability, $currentDay);
+    
+                // Calculate payment details
                 $sessions = $customer->tattooSessions;
                 $totalPaid = $sessions->where('session_type', 'paid')->sum('invoice');
                 $pendingPayments = $sessions->where('session_type', 'pending')->sum('invoice');
                 $unpaidSessionsCount = $sessions->where('session_type', 'unpaid')->sum('invoice');
+                
                 $customer->payment_details = [
                     'total_paid' => $totalPaid,
                     'pending_payments' => $pendingPayments,
@@ -34,6 +44,19 @@ class CustomerController extends Controller
         return response()->json($customers);
     }
     
+    // Helper function to check if the current day is in the availability string
+    private function isAvailableToday($availability, $currentDay)
+    {
+        // Split availability days and check if the current day is in the list
+        $availabilityDays = explode(', ', $availability);  // Example: "EVERY MONDAY, EVERY TUESDAY"
+        foreach ($availabilityDays as $day) {
+            if (stripos($day, $currentDay) !== false) { // case-insensitive comparison
+                return true;
+            }
+        }
+    
+        return false;
+    }
     
 
 public function store(Request $request)
