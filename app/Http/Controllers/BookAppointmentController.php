@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\BookAppointment;
 use Illuminate\Http\Request;
+use App\Mail\BookAppointmentMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Customer;
 
 class BookAppointmentController extends Controller
 {
@@ -38,19 +41,29 @@ class BookAppointmentController extends Controller
     
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'customer_id' => 'required|exists:customers,id',
-            'calendar_date' => 'required|string',
+            'calendar_date' => 'required|string', 
         ]);
     
         $appointment = BookAppointment::create([
-            'user_id' => auth()->id(), 
-            'customer_id' => $request->customer_id,
-            'calendar_date' => $request->calendar_date,
+            'user_id' => auth()->id(),
+            'customer_id' => $validated['customer_id'],
+            'calendar_date' => $validated['calendar_date'],
         ]);
+    
+        $customer = Customer::find($validated['customer_id']);
+    
+        if ($customer && !empty($customer->email)) {
+            Mail::to($customer->email)->send(new BookAppointmentMail($validated['calendar_date']));
+        }
     
         return response()->json($appointment, 201);
     }
+
+
+
+
         public function show($id)
     {
         $appointment = BookAppointment::with(['user', 'customer'])->findOrFail($id);
