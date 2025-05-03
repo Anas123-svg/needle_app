@@ -10,7 +10,8 @@ use App\Models\PortfolioImageCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
     private function createResponseWithTaxes($user, $token)
@@ -67,7 +68,7 @@ class AuthController extends Controller
                 $validTaxCount++;
             }
         }
-
+        $verificationCode = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
     
             $user = User::create([
                 'artist_name' => $request->artist_name,
@@ -81,7 +82,9 @@ class AuthController extends Controller
                 'phone' => $request->phone,
                 'is_premium_user' => $request->is_premium_user,
                 'free_trial' => $request->free_trial,
-                'profile_image'=>$request->profile_image
+                'profile_image'=>$request->profile_image,
+                'email_verification_code' => $verificationCode,
+                'is_email_verified' => false,
             ]);
            $taxData = [
             'user_id' => $user->id,
@@ -96,18 +99,18 @@ class AuthController extends Controller
             'no_of_valid_taxes' => $validTaxCount,
             ];
 
+            Mail::raw("Your verification code is: $verificationCode", function ($message) use ($user) {
+                $message->to($user->artist_email)
+                        ->subject('Email Verification Code');
+            });
+
         
         Tax::create($taxData);
         
         PortfolioImageCategory::create([
             'user_id' => $user->id,
             'name' => 'tattoo',  // Default category name
-        ]);
-
-
-            
-            
-            
+        ]);  
             
             if ($request->has('rates')) {
                 foreach ($request->rates as $rateData) {
@@ -156,4 +159,30 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
         return response()->json(['message' => 'Successfully logged out']);
     }
+
+
+    public function verifyEmail(Request $request)
+{
+    $request->validate([
+        'verification_code' => 'required|string',
+    ]);
+
+    $user = auth()->user();
+
+    if (!$user) {
+        return response()->json(['error' => 'Unauthorized.'], 401);
+    }
+
+    if ($user->email_verification_code === $request->verification_code) {
+        $user->update([
+            'is_email_verified' => true,
+            'email_verification_code' => null,
+        ]);
+
+        return response()->json(['message' => 'Email verified successfully.']);
+    }
+
+    return response()->json(['error' => 'Invalid verification code.'], 400);
+}
+
 }

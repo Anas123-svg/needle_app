@@ -29,6 +29,8 @@ class User extends Authenticatable
         'weekly_summary_email',
         'weekly_summary',
         'BookingRemainderToClients',
+        'email_verification_code',
+        'is_email_verified',    
     ];
 
     protected $hidden = [
@@ -58,7 +60,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Customer::class, 'user_id');
     }
-
-
-
 }

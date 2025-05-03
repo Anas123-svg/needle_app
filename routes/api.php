@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/artist', [UserController::class, 'show']);
+    Route::post('/verify-email', [AuthController::class, 'verifyEmail']);
     //Route::post('/user', [UserController::class, 'store']);
     Route::put('/artist/update', [UserController::class, 'update']);
     Route::delete('/user/{id}', [UserController::class, 'destroy']);
