@@ -53,7 +53,9 @@ class UserController extends Controller
                                   ->where('session_type', 'paid')
                                   ->whereBetween('created_at', [$thisYear, now()])
                                   ->sum('invoice');
-         
+         if($user->is_email_verified == 0 || $user->is_email_verified == false){
+            return response()->json(['error' => 'Email is not verified'], 403);
+        }
         return response()->json([
             'user' => $user,
             'total_sessions' => $user->tattoo_sessions_count,
