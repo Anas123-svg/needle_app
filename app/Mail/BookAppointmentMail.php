@@ -13,11 +13,13 @@ class BookAppointmentMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $calendar_date;
+    public $day, $month,$year;
 
-    public function __construct($calendar_date)
+    public function __construct($day,$month,$year)
     {
-        $this->calendar_date = $calendar_date;
+        $this->day = $day;
+        $this->month = $month;
+        $this->year = $year;
     }
 
     public function build()

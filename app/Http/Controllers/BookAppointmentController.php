@@ -8,6 +8,7 @@ use App\Mail\BookAppointmentMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Customer;
 
+use Carbon\Carbon;
 class BookAppointmentController extends Controller
 {
     public function index()
@@ -51,11 +52,21 @@ class BookAppointmentController extends Controller
             'customer_id' => $validated['customer_id'],
             'calendar_date' => $validated['calendar_date'],
         ]);
+        try {
+            $date = Carbon::parse($validated['calendar_date'])->startOfDay(); // Ensures only the date part is used
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Invalid date format'], 422);
+        }
     
         $customer = Customer::find($validated['customer_id']);
+
+        $day = $date->day;           
+        $month = $date->monthName;   
+        $year = $date->year;         
+
     
         if ($customer && !empty($customer->email)) {
-            Mail::to($customer->email)->send(new BookAppointmentMail($validated['calendar_date']));
+            Mail::to($customer->email)->send(new BookAppointmentMail($day, $month, $year));
         }
     
         return response()->json($appointment, 201);
