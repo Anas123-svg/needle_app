@@ -146,6 +146,16 @@ class AuthController extends Controller
             ]);
         }
 
+        if (!$user->is_email_verified) {
+            $verificationCode = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+    
+            $user->update(['email_verification_code' => $verificationCode]);
+    
+            Mail::raw("Your new verification code is: $verificationCode", function ($message) use ($user) {
+                $message->to($user->artist_email)
+                        ->subject('Email Verification Code');
+            });
+        }
         $user->load(['taxes', 'rates']);
 
 
